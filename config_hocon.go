@@ -226,6 +226,14 @@ func (p *HOCONConfiguration) String() string {
 type HOCONConfigProvider struct {
 }
 
+func init() {
+	RegisterConfigurationProvider("hocon", NewHOCONConifProvider)
+}
+
+func NewHOCONConifProvider() (ConfigurationProvider, error) {
+	return &HOCONConfigProvider{}, nil
+}
+
 func (p *HOCONConfigProvider) LoadConfig(filename string) Configuration {
 	conf := configuration.LoadConfig(filename)
 	return NewHOCONConfiguration(conf)

@@ -137,3 +137,15 @@ func ConfigProvider(provider ConfigurationProvider) Option {
 		o.configProvider = provider
 	}
 }
+
+func ConfigProviderByName(driverName string) Option {
+	return func(o *Config) {
+
+		provider, err := NewConfigurationProvider(driverName)
+		if err != nil {
+			panic("create configration provider of " + driverName + " failure. error:" + err.Error())
+		}
+
+		o.configProvider = provider
+	}
+}
